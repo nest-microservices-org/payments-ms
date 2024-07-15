@@ -30,8 +30,8 @@ export class PaymentsService {
       },
       line_items: lineItems,
       mode: 'payment',
-      success_url: 'http://localhost:3003/payments/success',
-      cancel_url: 'http://localhost:3003/payments/cancel',
+      success_url: envs.STRIPE_SUCCESS_URL,
+      cancel_url: envs.STRIPE_CANCEL_URL,
     });
     return session;
   }
@@ -43,7 +43,7 @@ export class PaymentsService {
     // const endPointSecret = "whsec_ceeea5137a60825e57197f0ca8baac42ce9165764d7a55c87f86a33e064a7e33"
 
     //real
-    const endPointSecret = "whsec_UxG4DepFUskGwrxtrynHsDAIiZHuQwBG"
+    const endPointSecret = envs.STRIPE_SECRET;
     try {
       event = this.stripe.webhooks.constructEvent(request["rawBody"], sig, endPointSecret);
     } catch (error) {
